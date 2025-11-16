@@ -1,7 +1,7 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
 import CurrentWeather from './components/CurrentWeather'
-import Footer from './components/footer'
+import Footer from './components/Footer'
 
 function App() {
   return <Grid templateAreas={{
