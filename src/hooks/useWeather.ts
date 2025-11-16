@@ -11,7 +11,7 @@ const useWeather = ( location: string ) => {
     const controller = new AbortController();
 
     apiClient
-      .get<FeatchWeatherResponse>(`/current.json?q=${location}`, { signal: controller.signal })
+      .get<FeatchWeatherResponse>(`/forecast.json?q=${location}`, { signal: controller.signal })
       .then((res) => setWeather(res.data))
       .catch((err) => {
         if (err instanceof CanceledError) return;
