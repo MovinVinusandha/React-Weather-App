@@ -2,15 +2,25 @@ import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 
+interface Condition {
+    text: string
+    icon: string
+}
+
 interface Current {
   temp_c: number
+  wind_kph: number
+  humidity: number
+  feelslike_c: number
+  condition: Condition
 }
 
 interface Location {
   name: string
+  country: string
 }
 
-interface FeatchWeatherResponse {
+export interface FeatchWeatherResponse {
   location: Location,
   current: Current
 }

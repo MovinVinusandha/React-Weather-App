@@ -1,5 +1,6 @@
 import { Text } from "@chakra-ui/react"
 import useWeather from "../hooks/useWeather";
+import CurrentWeatherCard from "./CurrentWeatherCard";
 
 interface Props {
   location: string
@@ -11,7 +12,7 @@ function CurrentWeather({ location }: Props) {
   return (
     <>
       {error && <Text>{error}</Text>}
-      <Text>{weather && `${weather?.location.name} : ${weather?.current.temp_c}°C`}</Text>
+      {weather && <CurrentWeatherCard weather={weather} />}
     </>
   )
 }
