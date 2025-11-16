@@ -1,5 +1,5 @@
 import { Box, Card, CardBody, Heading, HStack, VStack, Text, Image } from "@chakra-ui/react"
-import { FeatchWeatherResponse } from "../hooks/useWeather"
+import { FeatchWeatherResponse } from "../interfaces/WeatherResponse"
 import image from '../assets/current_weather_background.png'
 
 interface Props {
