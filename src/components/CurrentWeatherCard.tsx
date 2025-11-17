@@ -16,6 +16,7 @@ function CurrentWeatherCard({ weather }: Props) {
             color={'white'}
             role="group"
             overflow="hidden"
+            marginY='2.5rem'
         >
             <CardBody>
                 <HStack

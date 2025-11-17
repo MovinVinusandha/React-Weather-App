@@ -14,11 +14,11 @@ function App() {
     <GridItem area="nav" >
         <NavBar />
       </GridItem>
-      <GridItem area="main" bg='blue.300' >
+      <GridItem marginX={{ base: "1rem", md: "5rem", lg: "8rem" }} area="main" marginBottom='4rem'>
         <SearchBarArea lastUpdated={lastUpdated} />
         <CurrentWeather location='colombo' onLastUpdatedChange={setLastUpdated} />
       </GridItem>
-    <GridItem area="footer" bg='green.300' >
+    <GridItem area="footer" bg='#E7E4E3'> 
         <Footer />
       </GridItem>
     </Grid>

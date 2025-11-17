@@ -8,13 +8,14 @@ interface Props {
 function SearchBarArea({ lastUpdated }: Props) {
   return (
     <Flex 
+        marginTop='1rem'
         align="center" 
         justify="space-between" 
         gap={{ base: 4, md: 8 }}
         >
           <VStack alignItems={'left'}>
-        <Text fontSize={{ base: 'lg', md: '2xl' }} fontWeight="700" whiteSpace='nowrap'>Weather Forecast</Text>
-        <Text color='#5E5E5E'>{lastUpdated}</Text>
+        <Text fontSize='2rem' fontWeight="700" whiteSpace='nowrap'>Weather Forecast</Text>
+        <Text color='#5E5E5E' fontSize='1rem'>{lastUpdated}</Text>
       </VStack>
 
       <Box>
