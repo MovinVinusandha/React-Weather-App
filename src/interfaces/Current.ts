@@ -5,5 +5,6 @@ export interface Current {
   wind_kph: number
   humidity: number
   feelslike_c: number
+  last_updated: string
   condition: Condition
 }
