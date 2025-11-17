@@ -2,6 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import NavBar from './components/NavBar'
 import CurrentWeather from './components/CurrentWeather'
 import Footer from './components/Footer'
+import SearchBarArea from './components/SearchBarArea'
 
 function App() {
   return <Grid templateAreas={{
@@ -11,7 +12,8 @@ function App() {
       <NavBar />
     </GridItem>
     <GridItem area="main" bg='blue.300' >
-      <CurrentWeather location='colombo' />
+        <SearchBarArea />
+        <CurrentWeather location='colombo' />
     </GridItem>
     <GridItem area="footer" bg='green.300' >
       <Footer />
