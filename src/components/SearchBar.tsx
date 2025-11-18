@@ -17,9 +17,12 @@ function SearchBar({ onSearch }: Props) {
   return (
     <Box position='relative'>
       <form onSubmit={(event) => {
-        event.preventDefault();
-        if (ref.current) setSearchText(ref.current.value);
-      }}>
+          event.preventDefault();
+          if (searchResult && searchResult.length > 0) {
+            onSearch(searchResult[0].id);
+            setSearchText('');
+          }
+        }}>
         <InputGroup>
           <InputLeftElement children={<BsSearch />}/>
           <Input
@@ -27,11 +30,22 @@ function SearchBar({ onSearch }: Props) {
             placeholder="Search City"
             bg="gray.100"
             ref={ref}
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value)
+            }}
             w={{ base: '220px', md: '360px', lg: '480px' }}
           />
         </InputGroup>
       </form>
-      <SuggestionBox onSearch={onSearch} searchResult={searchResult}/>
+      <SuggestionBox
+        onSearch={(id: number) => {
+          onSearch(id);
+          setSearchText("");
+        }}
+        searchResult={searchResult}
+        query={searchText}
+      />
     </Box>
   )
 }

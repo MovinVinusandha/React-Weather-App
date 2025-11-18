@@ -4,9 +4,12 @@ import { FeatchSearchResponse } from "../interfaces/SearchResponse";
 interface Props {
   searchResult: FeatchSearchResponse | undefined;
   onSearch : (searchId: number) => void;
+  query?: string;
 }
 
-function SuggestionBox({ searchResult, onSearch }: Props) {
+function SuggestionBox({ searchResult, onSearch, query = "" }: Props) {
+  if (!query || query.trim() === "") return null;
+
   return (
     <Box
       position="absolute"
@@ -39,8 +42,8 @@ function SuggestionBox({ searchResult, onSearch }: Props) {
             </HStack>
           </ListItem>
         ))}
-        {searchResult?.length === 0 && (
-          <ListItem px={3} py={2}>
+        {!searchResult || searchResult.length === 0 && (
+           <ListItem px={3} py={2}>
             <Text color="gray.500">No results</Text>
           </ListItem>
         )}
