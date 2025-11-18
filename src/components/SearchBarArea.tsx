@@ -3,7 +3,7 @@ import SearchBar from './SearchBar'
 
 interface Props {
   lastUpdated?: string | null;
-  onSearch : (searchText: string) => void;
+  onSearch : (searchId: number) => void;
 }
 
 function SearchBarArea({ lastUpdated, onSearch }: Props) {

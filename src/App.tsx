@@ -5,14 +5,12 @@ import Footer from './components/Footer'
 import SearchBarArea from './components/SearchBarArea'
 import { useState } from "react";
 import './App.css'
-import useSearch from './hooks/useSearch'
+
+const search_location_id = 2842281  // colombo - sri lanka
 
 function App() {
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);
-  const [searchText, setSearchText] = useState<string>('colombo');
-  
-  const { searchResult } = useSearch(searchText);
-
+  const [searchLocationId, setSearchLocationId] = useState<number>(search_location_id);
   return <Grid templateAreas={{
     base: `"nav" "main" "footer"`
       }}>
@@ -20,8 +18,8 @@ function App() {
         <NavBar />
       </GridItem>
       <GridItem marginX={{ base: "1rem", md: "5rem", lg: "8rem" }} area="main" marginBottom='4rem'>
-        <SearchBarArea lastUpdated={lastUpdated} onSearch={setSearchText}/>
-        <CurrentWeather location={searchResult} onLastUpdatedChange={setLastUpdated} />
+        <SearchBarArea lastUpdated={lastUpdated} onSearch={setSearchLocationId}/>
+        <CurrentWeather locationId={searchLocationId} onLastUpdatedChange={setLastUpdated} />
       </GridItem>
     <GridItem area="footer" bg='#E7E4E3'> 
         <Footer />
