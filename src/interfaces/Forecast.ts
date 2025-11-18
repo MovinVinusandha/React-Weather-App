@@ -13,6 +13,7 @@ interface ForecastDay {
 export interface Hour {
     time: string
     temp_c: number
+    temp_f: number
     humidity: number
     condition: Condition
 }

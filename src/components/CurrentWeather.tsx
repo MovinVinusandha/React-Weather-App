@@ -1,5 +1,5 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import useWeather from "../hooks/useWeather";
 import CurrentWeatherCard from "./CurrentWeatherCard";
@@ -7,6 +7,7 @@ import HourWeatherCard from "./HourWeatherCard";
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import HourWeatherHeading from "./HourWeatherHeading";
 
 interface Props {
   location: string
@@ -20,16 +21,16 @@ interface ArrowProps {
 }
 
 export const SamplePrevArrow: React.FC<ArrowProps> = (props) => {
-    const { className, style, onClick } = props;
+  const { className, style, onClick } = props;
     return(
         <div onClick={onClick} className={`arrow ${className}`} >
         <AiOutlineArrowLeft className="arrows" style={{color:"white"}}/>
-        </div>
+    </div>
     )
 }
 
- export const SampleNextArrow: React.FC<ArrowProps> = (props) => {
-    const { className, style, onClick } = props;
+export const SampleNextArrow: React.FC<ArrowProps> = (props) => {
+  const { className, style, onClick } = props;
     return(
     <div onClick={onClick} className={`arrow ${className}`} >
         <AiOutlineArrowRight className="arrows" style={{color:"white"}}/>
@@ -39,6 +40,7 @@ export const SamplePrevArrow: React.FC<ArrowProps> = (props) => {
 
 function CurrentWeather({ location, onLastUpdatedChange }: Props) {
   const { weather, error } = useWeather(location);
+  const [isCelsius, setIsCelsius] = useState<boolean>(true);
 
   const settings = {
     dots: true,
@@ -69,12 +71,17 @@ function CurrentWeather({ location, onLastUpdatedChange }: Props) {
   return (
     <>
       {error && <Text>{error}</Text>}
-      {weather && <CurrentWeatherCard weather={weather} />}
+      {weather && (
+        <CurrentWeatherCard weather={weather} isCelsius={isCelsius} />
+      )}
+      <HourWeatherHeading onCelsiusChange={(isC) => {setIsCelsius(isC)}} isCelsius={isCelsius} />
       {weather && (
         <SimpleGrid columns={1} spacing={10} marginY='2.5rem'>
           <Slider {...settings}>
             {weather?.forecast?.forecastday.map((day) =>
-              day.hour.map((hour) => <HourWeatherCard key={hour.time} hour={hour} />)
+              day.hour.map((hour) => (
+                <HourWeatherCard key={hour.time} hour={hour} isCelsius={isCelsius} />
+              ))
             )}
           </Slider>
         </SimpleGrid>

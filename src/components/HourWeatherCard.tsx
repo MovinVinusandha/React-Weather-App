@@ -3,21 +3,22 @@ import { Hour } from "../interfaces/Forecast"
 import { BsThermometerHalf, BsDroplet } from "react-icons/bs";
 
 interface Props {
-    hour: Hour
+  hour: Hour;
+  isCelsius?: boolean;
 }
 
-function HourWeatherCard({ hour }: Props) {
+function HourWeatherCard({ hour, isCelsius = true }: Props) {
   return (
     <Card
-            borderRadius="1.25rem"
-            borderColor='#BAA3FA'
+      borderRadius="1.25rem"
+      borderColor='#BAA3FA'
             borderWidth='3px'
-            backgroundSize="cover"
-            role="group"
-            overflow="hidden"
-            marginX='1rem'
-        >
-            <CardBody>
+      backgroundSize="cover"
+      role="group"
+      overflow="hidden"
+      marginX='1rem'
+    >
+      <CardBody>
                 <HStack
                     justifyContent="space-between"
                     alignItems="center"
@@ -27,30 +28,31 @@ function HourWeatherCard({ hour }: Props) {
                         align="start" 
                         spacing={1}
                     >
-                        <Heading size="sm">{hour.time}</Heading>
-                        <Text fontSize="sm" color="#b5b5b5">
-                            {hour.condition.text}
-                        </Text>
-                        <Text  fontSize={{ base: 'sm', md: 'md' }}>
-                            <Box display='inline-flex'>
-                                <Icon boxSize='1.5rem' color='#9B79F8' as={BsThermometerHalf} />
-                                {hour.temp_c}°C
-                            </Box>
-                        </Text>
+            <Heading size="sm">{hour.time}</Heading>
+            <Text fontSize="sm" color="#b5b5b5">
+              {hour.condition.text}
+            </Text>
+            <Text  fontSize={{ base: 'sm', md: 'md' }}>
+              <Box display='inline-flex'>
+                <Icon boxSize='1.5rem' color='#9B79F8' as={BsThermometerHalf} />
+                {Math.round(isCelsius ? hour.temp_c : hour.temp_f)}
+                {isCelsius ? "°C" : "°F"}
+              </Box>
+            </Text>
                         <Text fontSize={{ base: 'sm', md: 'md' }}>
                             <Box display='inline-flex'>
                                 <Icon boxSize='1.5rem' color='#9B79F8' as={BsDroplet} />
-                                {hour.humidity}%
-                            </Box>
-                        </Text>
-                    </VStack>
+                {hour.humidity}%
+              </Box>
+            </Text>
+          </VStack>
 
-                    <VStack align="end" spacing={2}>
-                        <Image src={hour.condition.icon} />
-                    </VStack>
-                </HStack>
-            </CardBody>
-        </Card>
+          <VStack align="end" spacing={2}>
+            <Image src={hour.condition.icon} />
+          </VStack>
+        </HStack>
+      </CardBody>
+    </Card>
   )
 }
 
