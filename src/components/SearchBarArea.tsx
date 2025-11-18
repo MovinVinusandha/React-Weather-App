@@ -3,9 +3,10 @@ import SearchBar from './SearchBar'
 
 interface Props {
   lastUpdated?: string | null;
+  onSearch : (searchText: string) => void;
 }
 
-function SearchBarArea({ lastUpdated }: Props) {
+function SearchBarArea({ lastUpdated, onSearch }: Props) {
   return (
     <Flex 
         marginTop='1rem'
@@ -19,7 +20,7 @@ function SearchBarArea({ lastUpdated }: Props) {
       </VStack>
 
       <Box>
-        <SearchBar />
+        <SearchBar onSearch={onSearch}/>
       </Box>
     </Flex>
   )

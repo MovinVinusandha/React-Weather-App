@@ -8,9 +8,10 @@ import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import HourWeatherHeading from "./HourWeatherHeading";
+import { FeatchSearchResponse } from "../interfaces/SearchResponse";
 
 interface Props {
-  location: string
+  location: FeatchSearchResponse | undefined;
   onLastUpdatedChange?: (lastUpdated: string) => void;
 }
 
@@ -39,7 +40,7 @@ export const SampleNextArrow: React.FC<ArrowProps> = (props) => {
 }
 
 function CurrentWeather({ location, onLastUpdatedChange }: Props) {
-  const { weather, error } = useWeather(location);
+  const { weather, error } = useWeather(location?.[0]?.name || "");
   const [isCelsius, setIsCelsius] = useState<boolean>(true);
 
   const settings = {
