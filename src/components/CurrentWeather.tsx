@@ -1,8 +1,11 @@
 import { SimpleGrid, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
+import Slider from "react-slick";
 import useWeather from "../hooks/useWeather";
 import CurrentWeatherCard from "./CurrentWeatherCard";
 import HourWeatherCard from "./HourWeatherCard";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Props {
   location: string
@@ -11,6 +14,24 @@ interface Props {
 
 function CurrentWeather({ location, onLastUpdatedChange }: Props) {
   const { weather, error } = useWeather(location);
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      }
+    ]
+  };
 
   useEffect(() => {
     if (!weather) return;
@@ -23,10 +44,12 @@ function CurrentWeather({ location, onLastUpdatedChange }: Props) {
       {error && <Text>{error}</Text>}
       {weather && <CurrentWeatherCard weather={weather} />}
       {weather && (
-        <SimpleGrid columns={3} spacing={10}>
-          {weather?.forecast?.forecastday.map((day) =>
-            day.hour.map((hour) => <HourWeatherCard key={hour.time} hour={hour} />)
-          )}
+        <SimpleGrid columns={1} spacing={10} marginY='2.5rem'>
+          <Slider {...settings}>
+            {weather?.forecast?.forecastday.map((day) =>
+              day.hour.map((hour) => <HourWeatherCard key={hour.time} hour={hour} />)
+            )}
+          </Slider>
         </SimpleGrid>
       )}
     </>
