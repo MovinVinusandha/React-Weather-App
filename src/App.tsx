@@ -4,6 +4,7 @@ import CurrentWeather from './components/CurrentWeather'
 import Footer from './components/Footer'
 import SearchBarArea from './components/SearchBarArea'
 import { useState } from "react";
+import './App.css'
 
 function App() {
   const [lastUpdated, setLastUpdated] = useState<string | null>(null);

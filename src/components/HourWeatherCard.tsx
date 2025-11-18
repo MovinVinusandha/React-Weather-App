@@ -15,6 +15,7 @@ function HourWeatherCard({ hour }: Props) {
             backgroundSize="cover"
             role="group"
             overflow="hidden"
+            marginX='1rem'
         >
             <CardBody>
                 <HStack
