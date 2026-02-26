@@ -3,6 +3,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 ARG REACT_APP_API_KEY
+ENV REACT_APP_API_KEY=$REACT_APP_API_KEY
 
 COPY package*.json ./
 RUN npm ci

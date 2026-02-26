@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        WEATHER_API_KEY = credentials('WEATHER_API_KEY')
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,18 +14,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
-                    sh 'docker build -t --build-arg REACT_APP_API_KEY=${WEATHER_API_KEY} weather-app:latest .'
-                }
+                sh "docker build -t weather-app:latest --build-arg REACT_APP_API_KEY=${WEATHER_API_KEY} ."
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker stop weather-app-container || true'
-                sh 'docker rm weather-app-container || true'
-                
-                sh 'docker run -d -p 8000:80 --name weather-app-container weather-app:latest'
+                sh "docker stop weather-app-container || true"
+                sh "docker rm weather-app-container || true"
+                sh "docker run -d -p 8000:80 --name weather-app-container weather-app:latest"
             } 
         }
     }
