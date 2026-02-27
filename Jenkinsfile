@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "docker build -t weather-app:latest --build-arg REACT_APP_API_KEY=${WEATHER_API_KEY} ."
+                sh "docker build -t weather-app:latest --build-arg VITE_WEATHER_API_KEY=${WEATHER_API_KEY} ."
             }
         }
 
